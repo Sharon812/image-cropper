@@ -1,16 +1,16 @@
-const express = require('express');
-const path = require('path');
+const express = require("express");
+const path = require("path");
+const env = require("dotenv").config();
 const app = express();
-const port = 3000;
 
 // Serve static files from Views directory
-app.use(express.static(path.join(__dirname, 'Views')));
+app.use(express.static(path.join(__dirname, "Views")));
 
 // Serve the main page
-app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'Views', 'index.html'));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "Views", "index.html"));
 });
 
-app.listen(port, () => {
-    console.log(`Server running at http://localhost:${port}`);
+app.listen(process.env.PORT || 4000, () => {
+  console.log(`Server running at`);
 });
