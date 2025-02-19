@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Cropper</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: #f5f7fa;
+            color: #2d3748;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 1rem 0;
+            margin-bottom: 1rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 600;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .upload-section {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .img-container {
+            background: white;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin: 1rem 0;
+            max-height: 400px;
+            overflow: hidden;
+        }
+
+        .cropper-container {
+            max-height: 400px !important;
+        }
+
+        .cropper-view-box,
+        .cropper-face {
+            border-radius: 0;
+        }
+
+        .preview-section {
+            background: white;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        .preview-section h3 {
+            color: #4a5568;
+            margin-bottom: 0.5rem;
+            font-size: 1.2rem;
+        }
+
+        .preview-image {
+            max-width: 300px;
+            margin: 0 auto;
+            border-radius: 0.5rem;
+            overflow: hidden;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        button {
+            padding: 0.6rem 1rem;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .upload-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        #crop-btn {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            color: #2d3748;
+        }
+
+        #download-btn {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            color: #2d3748;
+        }
+
+        #reset-btn {
+            background: linear-gradient(135deg, #e53e3e 0%, #fc8181 100%);
+            color: white;
+        }
+
+        #file-input {
+            display: none;
+        }
+
+        .status-message {
+            text-align: center;
+            color: #4a5568;
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: #fff;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 8px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>✂️ Image Cropper</h1>
+    </header>
+
+    <div class="container">
+        <div class="upload-section">
+            <input type="file" id="file-input" accept="image/*">
+            <button class="upload-btn" onclick="document.getElementById('file-input').click()">
+                📁 Choose Image
+            </button>
+            <p class="status-message">Select an image to start cropping</p>
+        </div>
+        
+        <div class="img-container" style="display: none;">
+            <img id="image" src="" alt="Source Image">
+        </div>
+
+        <div class="button-group" style="display: none;">
+            <button id="crop-btn">✅ Save & Download</button>
+            <button id="download-btn" style="display: none;">⬇️ Download Again</button>
+            <button id="reset-btn">🔄 Reset</button>
+        </div>
+
+        <div class="preview-section" style="display: none;">
+            <h3>Preview</h3>
+            <div class="preview-image">
+                <img id="preview" src="" alt="Preview">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/cropperjs/1.5.13/cropper.min.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>
